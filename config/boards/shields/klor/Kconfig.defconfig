@@ -1,4 +1,32 @@
 if SHIELD_KLOR_DONGLE
+
+choice ZMK_DISPLAY_STATUS_SCREEN
+    default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+endchoice
+
+config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+    select LV_USE_LABEL
+    select LV_USE_IMG
+    select LV_USE_CANVAS
+    select LV_USE_ANIMIMG 
+    select LV_USE_ANIMATION
+    select LV_USE_LINE 
+    select LV_FONT_UNSCII_8
+    select ZMK_WPM
+    imply ZMK_HID_INDICATORS
+
+config LV_Z_MEM_POOL_SIZE
+    default 8192
+config I2C
+    default y
+
+config SSD1306
+    default y
+
+choice ZMK_DISPLAY_WORK_QUEUE
+    default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
+endchoice
+
 config ZMK_KEYBOARD_NAME
     default "KLOR DONGLE"
 
@@ -19,7 +47,7 @@ config BT_MAX_CONN
 config BT_MAX_PAIRED
     default 6
 
-endif # DONGLE
+endif
 
 if SHIELD_KLOR_LEFT || SHIELD_KLOR_RIGHT
 
@@ -28,19 +56,9 @@ if SHIELD_KLOR_LEFT || SHIELD_KLOR_RIGHT
 
 endif # LEFT RIGHT
 
-if ZMK_DISPLAY
+# if ZMK_DISPLAY
 
-config I2C
-    default y
-
-config SSD1306
-    default y
-
-choice ZMK_DISPLAY_WORK_QUEUE
-    default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
-endchoice
-
-endif
+# endif
 
 if LVGL
 
